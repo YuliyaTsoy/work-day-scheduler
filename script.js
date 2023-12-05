@@ -7,40 +7,40 @@ dayjs.locale(localeSettings);
 // Dependancies
 var userInput = $(".description");
 var saveButton = $(".saveBtn");
-var timeblock = $(".time-block");
+var timeblocks = $(".time-block");
 var hour = $(".hour");
 
 // Data
 var today = dayjs();
-var hoursNow = dayjs().format("H");
-
+var hoursNow = today.hour();
+console.log(hoursNow)
 // Functions
 
 // By pressing saveButton corresponding data is saved in the local storage
 saveButton.on("click", function () {
   userInput = $(this).siblings("textarea").val().trim();
   hour = $(this).siblings("div").attr("id");
-
+console.log(hour)
   localStorage.setItem(hour, userInput);
 });
 
 // checks current time and compares it to time on the scheduler. assigns different colors to the time blocks: past(grey), present (red), future (green)
-function checkCurrentTime() {
-  timeblock.each(function () {
-    var time = parseInt($(this).attr("id"));
 
+function checkCurrentTime() {
+  timeblocks.each(function () {
+    var time = parseInt($(this).attr("id"));
     if (time === hoursNow) {
-      timeblock.addClass("present");
-      timeblock.removeClass("future");
-      timeblock.removeClass("past");
+      $(this).addClass("present");
+      $(this).removeClass("future");
+      $(this).removeClass("past");
     } else if (time < hoursNow) {
-      timeblock.addClass("past");
-      timeblock.removeClass("future");
-      timeblock.removeClass("present");
+      $(this).addClass("past");
+      $(this).removeClass("future");
+      $(this).removeClass("present");
     } else {
-      timeblock.addClass("future");
-      timeblock.removeClass("past");
-      timeblock.removeClass("present");
+      $(this).addClass("future");
+      $(this).removeClass("past");
+      $(this).removeClass("present");
     }
   });
 }
