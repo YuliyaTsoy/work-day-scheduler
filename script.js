@@ -13,14 +13,14 @@ var hour = $(".hour");
 // Data
 var today = dayjs();
 var hoursNow = today.hour();
-console.log(hoursNow)
+
 // Functions
 
 // By pressing saveButton corresponding data is saved in the local storage
 saveButton.on("click", function () {
   userInput = $(this).siblings("textarea").val().trim();
   hour = $(this).siblings("div").attr("id");
-console.log(hour)
+
   localStorage.setItem(hour, userInput);
 });
 
@@ -47,7 +47,7 @@ function checkCurrentTime() {
 checkCurrentTime();
 
 // gets data from local storage and puts it back on the page: upon refresh data persists
-timeblock.each(function () {
+timeblocks.each(function () {
   var key = $(this).attr("id");
   var value = localStorage.getItem(key);
   $(this).children(userInput).val(value);
